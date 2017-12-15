@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <my-tabbar></my-tabbar>
+    <my-tabbar v-show="$store.state.bottomstate"></my-tabbar>
   </div>
 </template>
 

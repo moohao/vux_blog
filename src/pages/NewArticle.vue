@@ -41,12 +41,17 @@ export default {
         window.location.href = '/#/articles'
       })
     }
+  },
+  created () {
+    if (!this.$store.state.changeBottom) {
+      this.$store.commit('changeBottom', true)
+    }
   }
 }
 </script>
 
 <style scoped>
 .x-button {
-  margin-top: 20px;
+  margin: 10px 0 60px 0;
 }
 </style>

@@ -8,14 +8,21 @@
       <x-input title="作者" v-model="article.author"></x-input>
     </group>
     <group>
-      <x-textarea :rows="16" title="内容" v-model="article.content"></x-textarea>
+      <x-textarea :rows="14" title="内容" v-model="article.content"></x-textarea>
     </group>
-    <x-button type="primary" class="x-button" action-type="button" @click.native="editArticle">修改</x-button>
+    <flexbox>
+        <flexbox-item>
+          <x-button type="primary" class="x-button" action-type="button" @click.native="editArticle">修改</x-button>
+        </flexbox-item>
+        <flexbox-item>
+          <x-button type="warn" class="x-button" @click.native="deleteArticle($route.params.id)">删除</x-button>
+        </flexbox-item>
+    </flexbox>
   </div>
 </template>
 
 <script>
-import { Group, XInput, XTextarea, XHeader, XButton } from 'vux'
+import { Group, XInput, XTextarea, XHeader, XButton, Flexbox, FlexboxItem } from 'vux'
 
 export default {
   components: {
@@ -23,7 +30,9 @@ export default {
     XInput,
     XTextarea,
     XHeader,
-    XButton
+    XButton,
+    Flexbox,
+    FlexboxItem
   },
   data () {
     return {
@@ -47,16 +56,26 @@ export default {
         console.log(res.data)
         window.location.href = '/#/articles'
       })
+    },
+    deleteArticle: function (id) {
+      this.$axios.delete('http://rap2api.taobao.org/app/mock/1657/DELETE//articles/123321').then((res) => {
+        console.log(res.data)
+        console.log(id)
+        window.location.href = '/#/articles'
+      })
     }
   },
   created () {
     this.getArticle()
+    if (!this.$store.state.changeBottom) {
+      this.$store.commit('changeBottom', true)
+    }
   }
 }
 </script>
 
 <style scoped>
 .x-button {
-  margin-top: 20px;
+  margin: 10px 0 60px 0;
 }
 </style>

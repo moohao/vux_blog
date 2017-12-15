@@ -4,12 +4,12 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  user: '张三'
+  bottomstate: true
 }
 
 const mutations = {
-  change (user, name) {
-    state.user = name
+  changeBottom (bottomstate, status) {
+    state.bottomstate = status
   }
 }
 
